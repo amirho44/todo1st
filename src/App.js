@@ -1,16 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import Header from './components/Header';
+import List from './components/list';
+
 
 class App extends Component {
     state = {}
     render() {
-        return (<div>
-            <h1>
-                Todo Ap
-        </h1>
-            <h6>class type</h6>
-        </div>
+        return (
+            <Fragment>
+                <Header />
+                <List className=' w-50 bg-primary' />
 
-        );
+
+            </Fragment>
+
+
+
+        )
+
     }
 }
 
