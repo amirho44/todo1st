@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 class Header extends Component {
     render() {
         return (<header>
-            To do app
+            Webidemy To do list
         </header>)
     }
 
