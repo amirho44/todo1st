@@ -1,18 +1,32 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Header from './components/Header';
-import List from './components/list';
+import Todos from './components/Todos';
+
+
 
 
 class App extends Component {
-    state = {}
+    state = {
+        tasks: [
+            { taskName: 'make bed', taskPriority: 'routine' },
+            { taskName: 'cardio', taskPriority: 'health' },
+            { taskName: 'make website styles', taskPriority: 'job' }
+
+
+        ]
+    };
+
     render() {
+
+
+        const { tasks } = this.state
         return (
-            <Fragment>
+            <div>
                 <Header />
-                <List className=' w-50 bg-primary' />
+                <Todos tasks={tasks} />
 
 
-            </Fragment>
+            </div>
 
 
 

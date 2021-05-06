@@ -3,8 +3,8 @@ import { createContext } from 'react'
 
 const TodoContext = createContext({
 
-    lists: [],
-    list: '',
+    Todos: [],
+    Todo: '',
     NewTask: () => { },
     inputTask: () => { },
     finishTask: () => { },
