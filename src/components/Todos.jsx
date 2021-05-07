@@ -1,7 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
 
-const Todos = ({ tasks }) => {
+const Todos = ({ tasks, taskRemove }) => {
     return (
 
 
@@ -10,6 +10,8 @@ const Todos = ({ tasks }) => {
                 <Todo
                     taskName={task.taskName}
                     taskPriority={task.taskPriority}
+                    key={task.id}
+                    remove={() => taskRemove(task.id)}
 
                 />
             ))}
