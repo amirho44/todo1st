@@ -1,3 +1,14 @@
 body {
     background-color: rgb(245, 185, 74);
+
+}
+
+#root{
+   
+    display: flex;
+    min-height: 100%;
+
+
+position: relative;
+
 }

@@ -16,7 +16,9 @@ html,body{
     height: 100%;
 }
 
-
+.container { 
+    background-color: #f7a440;
+}
 
 .Todo {
 background-color: brown;
@@ -25,4 +27,66 @@ width: 30%;
 display:flex ;
 margin: auto;
 text-align: center;
+}
+
+.mainbox{
+    background-color: #fffffe;
+
+min-height: 300px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+border-radius: 5%;
+box-shadow : -10px 10px 60px rgba(66, 66, 66, 0.329);
+
+
+
+}
+.plustask{
+
+    color: rgb(255, 255, 255);
+    line-height: inherit !important;
+    
+    
+
+    
+
+}
+.boxheader{
+    background-color: cornflowerblue;
+    
+}
+
+.addbox{
+    position: relative;
+    bottom: 0;
+    padding:45px 0;
+    
+}
+.add-btn{
+    background-color: #aaaaaa;
+    outline: none;
+    border: none;
+}
+.addfield{
+    border: none;
+    outline: none;
+    background-color:#f6dcbf ;
+}
+
+.taskcap{
+    font-size: 1.3em;
+}
+
+.taskcap span,.taskcap i {
+    margin-right: 20px;
+
+}
+
+.taskcap i{
+    cursor: pointer;
+}
+.taskcap i:hover{
+    color: #e1701a;
 }

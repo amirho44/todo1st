@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Header from './components/Header';
 import Todos from './components/Todos';
-import Footer from './components/taskEnter';
+
 
 
 
@@ -15,23 +15,35 @@ class App extends Component {
     }
     //ES7
     state = {
-        tasks: [
-            { id: 1, taskName: 'make bed', taskPriority: 'routine' },
-            { id: 2, taskName: 'cardio', taskPriority: 'health' },
-            { id: 3, taskName: 'make website styles', taskPriority: 'job' }
-
-
-        ],
-        showTasks: false
+        tasks: [],
+        task: '',
+        completed: false,
+        showTasks: true
     };
     //these are methods
     showTasksFunction = () => {
         this.setState({ showTasks: !this.state.showTasks })
     }
 
-    // addTasks = ()=>{
 
-    // }
+    addTaskFunction = () => {
+        //duplicate of tasks in array
+        const tasks = [...this.state.tasks]
+        const task = {
+            id: Math.floor(Math.random() * 1000),
+            taskName: this.state.task
+
+        }
+        tasks.push(task)
+        this.setState({ tasks: tasks, task: '' });
+
+
+    }
+
+    setTask = event => {
+        this.setState({ task: event.target.value })
+    }
+
 
     removeTasksFunction = id => {
         const tasks = [...this.state.tasks];
@@ -40,33 +52,75 @@ class App extends Component {
 
     };
 
+
+    changeTasksFunction = (event, id) => {
+        const { tasks: alltasks } = this.state;
+
+        const taskIndex = alltasks.findIndex(t => t.id === id)
+        const task = alltasks[taskIndex];
+        task.taskName = event.target.value;
+        console.log(event);
+
+        const tasks = [...alltasks]
+
+        alltasks[taskIndex] = task;
+        this.setState({ tasks: tasks })
+
+
+    }
+
+
+    taskOmitFunction = () => {
+
+        const tasks = [...this.state.tasks]
+        const state = this.state.completed
+
+        this.setState({ completed: !this.state.completed })
+        console.log(state);
+    }
+
     render() {
-        const { tasks, showTasks } = this.state;
+        const { tasks, showTasks, completed } = this.state;
         let todoList = null;
 
 
-        if (showTasks) {
-            todoList = (<Todos
-                tasks={tasks}
-                taskRemove={this.removeTasksFunction}
-            />)
-        }
-
         return (
-            <div>
-                <Header />
-                {todoList}
-                <Footer />
-                <button className='btn btn-danger text-center d-flex justify-content-center mx-auto' onClick={this.showTasksFunction} >
-                    Change tasks
+
+            <div className='d-flex mainbox m-auto p-5 '>
+
+
+
+
+                <Todos
+                    tasks={tasks}
+                    taskRemove={this.removeTasksFunction}
+                    taskChange={this.changeTasksFunction}
+                    deltask={this.taskOmitFunction}
+                    State={this.state.completed}
+
+                />
+
+
+
+                <div className='d-flex row addbox'>
+                    <button className='d-flex add-btn text-center d-flex justify-content-center mx-auto' onClick={this.addTaskFunction} ><i class="fas fa-plus plustask mx-1" onClick={this.addTaskFunction} ></i>
+                        Add tasks
                 </button>
 
+                    <input type='text' className='addfield d-flex text-center d-flex justify-content-center mx-auto' placeholder='add task' onChange={this.setTask} />
+                </div>
 
+
+                <button className='d-flex btn btn-danger text-center d-flex justify-content-center mx-auto' onClick={this.showTasksFunction} >
+                    Show tasks
+                </button>
             </div>
 
 
 
-        )
+
+
+        );
 
     }
 }

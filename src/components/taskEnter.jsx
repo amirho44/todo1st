@@ -9,7 +9,7 @@ class Footer extends Component {
         return (
             <div>
                 <footer className='text-center'>
-                    <input type='text' />
+
                 </footer>
 
             </div>
