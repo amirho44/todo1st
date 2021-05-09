@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import Header from './components/Header';
 import Todos from './components/Todos';
+import { ToastContainer, toast } from 'react-toastify'
 
 
 
@@ -37,6 +37,10 @@ class App extends Component {
         tasks.push(task)
         this.setState({ tasks: tasks, task: '' });
 
+        toast.success('task added', {
+            position: 'bottom-left'
+        })
+
 
     }
 
@@ -49,6 +53,9 @@ class App extends Component {
         const tasks = [...this.state.tasks];
         const filteredTasks = tasks.filter(t => t.id !== id)
         this.setState({ tasks: filteredTasks });
+        toast.error('task removed', {
+            position: 'bottom-left'
+        })
 
     };
 
@@ -102,6 +109,9 @@ class App extends Component {
 
 
 
+
+
+
                 <div className='d-flex row addbox'>
                     <button className='d-flex add-btn text-center d-flex justify-content-center mx-auto' onClick={this.addTaskFunction} ><i class="fas fa-plus plustask mx-1" onClick={this.addTaskFunction} ></i>
                         Add tasks
@@ -109,7 +119,7 @@ class App extends Component {
 
                     <input type='text' className='addfield d-flex text-center d-flex justify-content-center mx-auto' placeholder='add task' onChange={this.setTask} />
                 </div>
-
+                <ToastContainer />
 
                 <button className='d-flex btn btn-danger text-center d-flex justify-content-center mx-auto' onClick={this.showTasksFunction} >
                     Show tasks
