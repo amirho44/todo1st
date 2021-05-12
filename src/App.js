@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import Todos from './components/Todos';
 import { ToastContainer, toast } from 'react-toastify'
+import todoContext from './context/todoContext';
+import Header from './components/Header';
+import AddNewTask from './components/AddNewTask';
 
 
 
@@ -18,12 +21,8 @@ class App extends Component {
         tasks: [],
         task: '',
         completed: false,
-        showTasks: true
     };
     //these are methods
-    showTasksFunction = () => {
-        this.setState({ showTasks: !this.state.showTasks })
-    }
 
 
     addTaskFunction = () => {
@@ -57,6 +56,8 @@ class App extends Component {
             position: 'bottom-left'
         })
 
+        console.log(tasks);
+
     };
 
 
@@ -86,52 +87,56 @@ class App extends Component {
         console.log(state);
     }
 
+
+
     render() {
         const { tasks, showTasks, completed } = this.state;
         let todoList = null;
+        todoList = (<Todos
+        // tasks={tasks}
+        // taskRemove={this.removeTasksFunction}
+        // taskChange={this.changeTasksFunction}
+        // deltask={this.taskOmitFunction}
+        // State={this.state.completed}
+
+        />
+
+        )
 
 
         return (
+            <todoContext.Provider value={{
+                state: this.state,
+                addTaskFunction: this.addTaskFunction,
+                changeTasksFunction: this.changeTasksFunction,
+                taskOmitFunction: this.taskOmitFunction,
+                removeTasksFunction: this.removeTasksFunction,
+            }}>
 
-            <div className='d-flex mainbox m-auto p-5 '>
+                <div className='back'>
+                    <Header />
+                    <div className=' mainbox m-auto '>
+                        {todoList}
+                        <form className='addbox' action='#'
+                            onSubmit={event => event.preventDefault()}
+                        >
+                            <button type='submit' className='add-btn' onClick={this.addTaskFunction} ><i class="fas fa-plus plustask mx-1"  ></i>
+    Add tasks
+    </button>
+                            <input type='text' className='addfield' placeholder='add task' onChange={this.setTask} />
+                        </form>
 
 
 
 
-                <Todos
-                    tasks={tasks}
-                    taskRemove={this.removeTasksFunction}
-                    taskChange={this.changeTasksFunction}
-                    deltask={this.taskOmitFunction}
-                    State={this.state.completed}
-
-                />
+                        <ToastContainer />
+                    </div>
 
 
-
-
-
-
-                <div className='d-flex row addbox'>
-                    <button className='d-flex add-btn text-center d-flex justify-content-center mx-auto' onClick={this.addTaskFunction} ><i class="fas fa-plus plustask mx-1" onClick={this.addTaskFunction} ></i>
-                        Add tasks
-                </button>
-
-                    <input type='text' className='addfield d-flex text-center d-flex justify-content-center mx-auto' placeholder='add task' onChange={this.setTask} />
                 </div>
-                <ToastContainer />
-
-                <button className='d-flex btn btn-danger text-center d-flex justify-content-center mx-auto' onClick={this.showTasksFunction} >
-                    Show tasks
-                </button>
-            </div>
-
-
-
-
+            </todoContext.Provider>
 
         );
-
     }
 }
 

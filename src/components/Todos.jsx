@@ -1,23 +1,35 @@
 import React from 'react';
+import todoContext from '../context/todoContext';
 import Todo from './Todo';
 
-const Todos = ({ tasks, taskRemove, taskChange, deltask, State }) => {
+const Todos = () => {
     return (
 
 
-        <div>
-            {tasks.map(task => (
-                <Todo
-                    key={task.id}
-                    taskName={task.taskName}
-                    remove={() => taskRemove(task.id)}
-                    changed={event => taskChange(event, task.id)}
-                    omit={deltask}
-                    State={State}
+        <todoContext.Consumer>
+            {context => (<div>
+                {context.state.tasks.map(task => (
+                    <Todo
+                        key={task.id}
+                        taskName={task.taskName}
+                        remove={() => context.removeTasksFunction(task.id)}
+                        changed={event => context.changeTasksFunction(event, task.id)}
+                        omit={context.taskOmitFunction}
+                        State={context.state.completed}
 
-                />
-            ))}
-        </div>
+
+                    />
+                ))}
+            </div>)
+
+
+            }
+
+
+        </todoContext.Consumer>
+
+
+
     )
 
 }

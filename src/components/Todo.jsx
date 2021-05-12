@@ -1,22 +1,21 @@
 import React from 'react';
 
 
-const Todo = ({ taskName, remove, omit, State }) => {
+const Todo = ({ key, taskName, remove, omit, State }) => {
 
-
-
-
+    console.log(key);
 
     return (
         <div className='text-left p-2 taskcap'>
 
 
-            <i class="fas fa-check" onClick={omit}></i>
-            <i onClick={remove} class="fa fa-trash" aria-hidden="true"></i>
+            <i className="fas fa-check" onClick={omit}></i>
+            <i onClick={remove} className="fa fa-trash" aria-hidden="true"></i>
 
             <span>
 
-                {State ? <del>{taskName}</del> : taskName}
+                {State ? <del className='del'>{taskName}</del> : taskName}
+
             </span>
         </div>
 
